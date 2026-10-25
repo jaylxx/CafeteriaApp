@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#FFF3E0">
+    android:background="@color/cream">
 
     <ImageView
         android:id="@+id/ivLogo"
@@ -17,8 +17,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="הקפיטריה"
-        android:textSize="32sp"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:textColor="#E65100" />
+        android:textColor="@color/orange" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="הזמינו אוכל בלי תור"
+        android:textSize="18sp"
+        android:textColor="@color/gray" />
 
 </LinearLayout>
