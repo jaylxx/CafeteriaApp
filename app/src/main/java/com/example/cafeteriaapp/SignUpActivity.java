@@ -27,32 +27,29 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                String confirm = etConfirm.getText().toString();
-                boolean ok = true;
+                String username = etUsername.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
+                String confirm = etConfirm.getText().toString().trim();
 
                 if (username.isEmpty()) {
                     etUsername.setError("יש להזין שם משתמש");
-                    ok = false;
+                    return;
                 }
                 if (password.length() < 6) {
                     etPassword.setError("הסיסמה צריכה להכיל לפחות 6 תווים");
-                    ok = false;
+                    return;
                 }
                 if (!confirm.equals(password)) {
                     etConfirm.setError("הסיסמאות לא תואמות");
-                    ok = false;
+                    return;
                 }
 
-                if (ok) {
-                    Toast.makeText(SignUpActivity.this, "נרשמת בהצלחה", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("password", password);
-                    startActivity(intent);
-                    finish();
-                }
+                Toast.makeText(SignUpActivity.this, "נרשמת בהצלחה", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("password", password);
+                startActivity(intent);
+                finish();
             }
         });
     }
