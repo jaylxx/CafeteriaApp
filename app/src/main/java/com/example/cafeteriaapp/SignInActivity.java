@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ public class SignInActivity extends AppCompatActivity {
 
     EditText etUsername, etPassword;
     Button btnSignIn;
+    CheckBox cbRememberMe;
     TextView tvGoToSignUp;
     String savedUsername, savedPassword;
 
@@ -24,6 +27,7 @@ public class SignInActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        cbRememberMe = findViewById(R.id.cbRememberMe);
         btnSignIn = findViewById(R.id.btnSignIn);
         tvGoToSignUp = findViewById(R.id.tvGoToSignUp);
 
@@ -47,6 +51,17 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "התחברת בהצלחה", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(SignInActivity.this, "שם משתמש או סיסמה שגויים", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        cbRememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(SignInActivity.this, "זכור אותי מופעל", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignInActivity.this, "זכור אותי בוטל", Toast.LENGTH_SHORT).show();
                 }
             }
         });
