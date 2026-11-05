@@ -48,6 +48,8 @@ public class SignInActivity extends AppCompatActivity {
             etUsername.setText(savedUsername);
         }
 
+        loadUser();
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,5 +96,17 @@ public class SignInActivity extends AppCompatActivity {
         editor.putString(KEY_PASSWORD, password);
         editor.putBoolean(KEY_REMEMBER, true);
         editor.apply();
+    }
+
+    private void loadUser() {
+        if (prefs.getBoolean(KEY_REMEMBER, false)) {
+            etUsername.setText(prefs.getString(KEY_USERNAME, ""));
+            etPassword.setText(prefs.getString(KEY_PASSWORD, ""));
+            cbRememberMe.setChecked(true);
+            if (savedUsername == null) {
+                savedUsername = prefs.getString(KEY_USERNAME, "");
+                savedPassword = prefs.getString(KEY_PASSWORD, "");
+            }
+        }
     }
 }
