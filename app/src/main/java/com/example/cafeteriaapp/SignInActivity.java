@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class SignInActivity extends AppCompatActivity {
 
     EditText etUsername, etPassword;
@@ -75,7 +77,11 @@ public class SignInActivity extends AppCompatActivity {
                 if (isChecked) {
                     Toast.makeText(SignInActivity.this, "זכור אותי מופעל", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(SignInActivity.this, "זכור אותי בוטל", Toast.LENGTH_SHORT).show();
+                    if (prefs.getBoolean(KEY_REMEMBER, false)) {
+                        showForgetSnackbar();
+                    } else {
+                        Toast.makeText(SignInActivity.this, "זכור אותי בוטל", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -108,5 +114,26 @@ public class SignInActivity extends AppCompatActivity {
                 savedPassword = prefs.getString(KEY_PASSWORD, "");
             }
         }
+    }
+
+    private void showForgetSnackbar() {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "לשכוח את פרטי ההתחברות השמורים?", Snackbar.LENGTH_LONG);
+        snackbar.setAction("כן, לשכוח", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefs.edit().clear().apply();
+                Toast.makeText(SignInActivity.this, "הפרטים נמחקו", Toast.LENGTH_SHORT).show();
+            }
+        });
+        snackbar.setActionTextColor(getColor(R.color.orange));
+        snackbar.addCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar transientBottomBar, int event) {
+                if (event != DISMISS_EVENT_ACTION) {
+                    cbRememberMe.setChecked(true);
+                }
+            }
+        });
+        snackbar.show();
     }
 }
