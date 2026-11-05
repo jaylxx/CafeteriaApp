@@ -1,6 +1,7 @@
 package com.example.cafeteriaapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,12 @@ public class SignInActivity extends AppCompatActivity {
     CheckBox cbRememberMe;
     TextView tvGoToSignUp;
     String savedUsername, savedPassword;
+    SharedPreferences prefs;
+
+    static final String PREFS_NAME = "login_prefs";
+    static final String KEY_USERNAME = "username";
+    static final String KEY_PASSWORD = "password";
+    static final String KEY_REMEMBER = "remember_me";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,8 @@ public class SignInActivity extends AppCompatActivity {
         cbRememberMe = findViewById(R.id.cbRememberMe);
         btnSignIn = findViewById(R.id.btnSignIn);
         tvGoToSignUp = findViewById(R.id.tvGoToSignUp);
+
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         Intent intent = getIntent();
         savedUsername = intent.getStringExtra("username");
@@ -48,6 +57,9 @@ public class SignInActivity extends AppCompatActivity {
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignInActivity.this, "יש למלא את כל השדות", Toast.LENGTH_SHORT).show();
                 } else if (savedUsername != null && username.equals(savedUsername) && password.equals(savedPassword)) {
+                    if (cbRememberMe.isChecked()) {
+                        saveUser(username, password);
+                    }
                     Toast.makeText(SignInActivity.this, "התחברת בהצלחה", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(SignInActivity.this, "שם משתמש או סיסמה שגויים", Toast.LENGTH_SHORT).show();
@@ -74,5 +86,13 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void saveUser(String username, String password) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_PASSWORD, password);
+        editor.putBoolean(KEY_REMEMBER, true);
+        editor.apply();
     }
 }
