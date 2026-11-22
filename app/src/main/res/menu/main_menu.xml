@@ -13,4 +13,8 @@
         android:id="@+id/action_exit"
         android:title="יציאה" />
 
+    <item
+        android:id="@+id/action_cart"
+        android:title="העגלה שלי" />
+
 </menu>

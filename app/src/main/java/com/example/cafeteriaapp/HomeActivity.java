@@ -38,6 +38,9 @@ public class HomeActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_exit) {
             binding.tvStatus.setText("בחרת: יציאה");
             return true;
+        } else if (item.getItemId() == R.id.action_cart) {
+            binding.tvStatus.setText("העגלה שלך ריקה כרגע");
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
