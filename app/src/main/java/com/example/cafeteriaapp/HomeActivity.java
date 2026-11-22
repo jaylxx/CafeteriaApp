@@ -1,9 +1,12 @@
 package com.example.cafeteriaapp;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cafeteriaapp.databinding.ActivityHomeBinding;
@@ -19,6 +22,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
+        binding.btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showClearDialog();
+            }
+        });
     }
 
     @Override
@@ -43,5 +53,19 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showClearDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ניקוי הודעה");
+        builder.setMessage("לנקות את ההודעה שעל המסך?");
+        builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                binding.tvStatus.setText("");
+            }
+        });
+        builder.setNegativeButton("לא", null);
+        builder.show();
     }
 }
