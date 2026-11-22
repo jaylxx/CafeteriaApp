@@ -1,6 +1,8 @@
 package com.example.cafeteriaapp;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,5 +19,26 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            binding.tvStatus.setText("בחרת: הגדרות");
+            return true;
+        } else if (item.getItemId() == R.id.action_about) {
+            binding.tvStatus.setText("בחרת: אודות");
+            return true;
+        } else if (item.getItemId() == R.id.action_exit) {
+            binding.tvStatus.setText("בחרת: יציאה");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
