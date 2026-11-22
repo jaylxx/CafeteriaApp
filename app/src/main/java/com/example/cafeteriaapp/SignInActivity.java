@@ -65,6 +65,8 @@ public class SignInActivity extends AppCompatActivity {
                         saveUser(username, password);
                     }
                     Toast.makeText(SignInActivity.this, "התחברת בהצלחה", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(SignInActivity.this, "שם משתמש או סיסמה שגויים", Toast.LENGTH_SHORT).show();
                 }
