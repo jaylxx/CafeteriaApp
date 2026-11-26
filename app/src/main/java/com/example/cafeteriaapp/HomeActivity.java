@@ -1,6 +1,7 @@
 package com.example.cafeteriaapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showClearDialog();
+            }
+        });
+
+        binding.btnFoodDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, FoodItemDetailsActivity.class);
+                startActivity(intent);
             }
         });
     }
